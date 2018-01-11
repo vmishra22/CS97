@@ -1,0 +1,119 @@
+# define a new house instance with identifier house1 and street address
+define house house1 address “374 Beacon Street, Boston, MA”
+
+# define a new room instance and attach to a house, contains 2 windows
+define room kitchen1 floor 1 type kitchen house house1 windows 2
+
+# define a new room instance and attach to a house, contains 3 windows
+define room bedroom1 floor 2 type bedroom house house1 windows 3
+
+# define a new occupant
+define occupant joe_smith type adult
+
+# define a new occupant
+define occupant louis_xvi type children
+
+# add joe_smith as an occupant to house1
+add occupant joe_smith to_house house1
+
+# add louis_xvi as an occupant to house1
+add occupant louis_xvi to_house house1
+
+#set location of occupant to a room
+set occupant joe_smith location house1:kitchen1
+
+# create a Ava appliance in bedroom
+define appliance ava1 type ava room house1:bedroom1
+
+# create a door in bedroom
+define appliance door1 type door room house1:bedroom1
+
+# create a Lamp light in bedroom
+define appliance light1 type light room house1:bedroom1
+
+# create a Ceiling Lights in bedroom
+define appliance light2 type light room house1:bedroom1
+
+# create a Television in bedroom
+define appliance TV1 type tv room house1:bedroom1
+
+# create a Thermostat in bedroom
+define appliance Thermostat1 type thermostat room house1:bedroom1
+
+# create a camera in bedroom
+define sensor camera1 type camera room house1:bedroom1
+
+# create a camera in kitchen
+define sensor camera2 type camera room house1:kitchen1
+
+# create a Ava appliance in kitchen
+define appliance ava2 type ava room house1:kitchen1
+
+# create a door in bedroom
+define appliance door1 type door room house1:kitchen1
+
+# create a smoke detector in kitchen
+define sensor smoke_detector1 type smoke_detector room house1:kitchen1
+
+# create a new oven in kitchen
+define appliance oven1 type oven room house1:kitchen1
+
+# create a new refrigerator in kitchen
+define appliance refrigerator1 type refrigerator room house1:kitchen1
+
+# create a Ceiling Light in kitchen
+define appliance light3 type light room house1:kitchen1
+
+#Command To Ava open the door of bedroom
+set appliance house1:bedroom1:ava1 status statusCommand value open_door
+
+#Command To Ava close the door of bedroom
+set appliance house1:bedroom1:ava1 status statusCommand value close_door
+
+#Command To Ava to On the lights
+set appliance house1:bedroom1:ava1 status statusCommand value lights_on
+
+#Command To Ava to Off the lights
+set appliance house1:bedroom1:ava1 status statusCommand value lights_off
+
+#Command to Ava to turn on the Television 
+set appliance house1:bedroom1:ava1 status statusGenericCommand value tv_power_on
+
+#Command to Ava to question the location of Joe
+set appliance house1:bedroom1:ava1 status statusQuestion value where_is_joe_smith?
+
+#Command to camera detecting occupant joe_smith in bedroom
+set sensor house1:bedroom1:camera1 status statusDetected value joe_smith
+
+#Command to camera detect leaving room occupant joe_smith from bedroom
+set sensor house1:bedroom1:camera1 status statusLeaving value joe_smith
+
+#Command to camera detecting occupant joe_smith in kitchen
+set sensor house1:kitchen1:camera2 status statusDetected value joe_smith
+
+#Command to camera detecting occupant joe_smith as resting
+set sensor house1:kitchen1:camera2 status statusInactive value joe_smith
+
+#Command to camera detecting occupant joe_smith as resting
+set sensor house1:kitchen1:camera2 status statusActive value joe_smith
+
+#Command to camera detecting occupant joe_smith as resting
+set sensor house1:kitchen1:smoke_detector1 status statusSmokeDetector value Alarm
+
+# turn the oven on and set the temperature to 350 degrees
+set appliance house1:kitchen1:oven1 status power value ON
+set appliance house1:kitchen1:oven1 status temperature value 350
+
+#Set time to cook for oven as 30 minutes which goes down to 0.
+set appliance house1:kitchen1:oven1 status timeToCook value 30
+set appliance house1:kitchen1:oven1 status timeToCook value 0
+
+#Set Beer count in refrigerator as 10 which goes down to 3.
+set appliance house1:kitchen1:refrigerator1 status beerCount value 10
+set appliance house1:kitchen1:refrigerator1 status beerCount value 3
+
+#Command To Ava to order more beer
+set appliance house1:kitchen1:ava2 status statusCommand value yes_order_beer
+
+# show the configuration for the house1
+show configuration house house1
